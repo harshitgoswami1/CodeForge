@@ -1,34 +1,29 @@
-# CodeForge 🚀  
-### AI-Powered Cloud IDE & Sandbox Platform
+# CodeForge
 
-CodeForge is a **full-stack AI-assisted cloud development platform** that provisions isolated coding environments on Kubernetes and allows users to build applications directly from the browser with live preview, terminal access, file editing, and AI-powered code generation.
+## AI-Powered Cloud IDE & Sandbox Platform
 
-Inspired by platforms like **Replit** and **CodeSandbox**, CodeForge combines:
-- ⚡ Ephemeral cloud sandboxes
-- 🤖 AI-driven file editing
-- 🖥️ Browser-based IDE
-- ☁️ Kubernetes-native infrastructure
-- 🔄 Persistent project storage
-- 🧠 Real-time developer workflows
+CodeForge is a full-stack AI-assisted cloud development platform that provisions isolated coding environments on Kubernetes and allows users to build applications directly from the browser with live preview, terminal access, file editing, and AI-powered code generation.
+
+Inspired by platforms like Replit and CodeSandbox, CodeForge combines ephemeral cloud sandboxes, AI-driven file editing, a browser-based IDE, Kubernetes-native infrastructure, persistent project storage, and real-time developer workflows.
 
 ---
 
-## ✨ Features
+## Features
 
-- 🔐 Google OAuth Authentication
-- 🧠 AI Chat Assistant for Code Editing
-- 📁 File Explorer with Live Updates
-- 🖥️ In-Browser Terminal using `node-pty`
-- ⚡ Live Preview with Vite HMR
-- ☁️ Per-user Isolated Kubernetes Sandboxes
-- 🗂️ Persistent Project Storage via S3
-- 📨 Notification Service with RabbitMQ
-- ⏳ Automatic Sandbox Cleanup using Redis TTL
-- 🐳 Fully Containerized Microservice Architecture
+- Google OAuth authentication for secure user management
+- AI chat assistant for code editing and generation
+- File explorer with live updates
+- In-browser terminal using `node-pty`
+- Live preview with Vite Hot Module Replacement
+- Per-user isolated Kubernetes sandboxes
+- Persistent project storage via AWS S3
+- Notification service with RabbitMQ
+- Automatic sandbox cleanup using Redis TTL
+- Fully containerized microservice architecture
 
 ---
 
-## 🏗️ Architecture Overview
+## Architecture Overview
 
 ```text
                     ┌─────────────────────┐
@@ -50,53 +45,49 @@ Inspired by platforms like **Replit** and **CodeSandbox**, CodeForge combines:
  └──────┬───────┘   │ ┌──────────┐ ┌──────────┐ ┌──────┐ │
         ▼           │ │ Template │ │  Agent   │ │ Sync │ │
  ┌──────────────┐   │ │  Vite App│ │ File APIs│ │ S3   │ │
- │ Notifications│   │ └──────────┘ └──────────┘ └──────┘ │
+ │Notifications │   │ └──────────┘ └──────────┘ └──────┘ │
  └──────────────┘   └─────────────────────────────────────┘
 ```
 
 ---
 
-## 🧠 How It Works
+## How It Works
 
-1. User logs in using Google OAuth.
-2. A new project is created or an old one is reopened.
-3. CodeForge provisions a dedicated sandbox pod inside Kubernetes.
+1. User logs in using Google OAuth
+2. A new project is created or an existing one is reopened
+3. CodeForge provisions a dedicated sandbox pod inside Kubernetes
 4. The pod contains:
    - A React/Vite preview server
    - A file-system agent
    - An S3 sync service
-5. Users interact with:
-   - 📂 File Explorer
-   - 💬 AI Chat
-   - 🖥️ Terminal
-   - 🌐 Live Preview
-6. AI agents can directly read and modify files inside the sandbox.
-7. Redis manages sandbox lifecycle and auto-cleanup.
+5. Users interact with the file explorer, AI chat, terminal, and live preview
+6. AI agents can directly read and modify files inside the sandbox
+7. Redis manages sandbox lifecycle and automatic cleanup
 
 ---
 
-# 🛠️ Tech Stack
+## Tech Stack
 
-## Frontend
+### Frontend
 - React 19
 - Vite
 - Tailwind CSS v4
 - Socket.IO
 - XTerm.js
 
-## Backend Services
+### Backend Services
 - Express.js
-- MongoDB + Mongoose
-- Redis + ioredis
+- MongoDB with Mongoose
+- Redis with ioredis
 - RabbitMQ
 - Nodemailer
 
-## AI Layer
+### AI Layer
 - LangChain
 - LangGraph
 - Mistral AI
 
-## Infrastructure
+### Infrastructure
 - Kubernetes
 - Docker
 - Skaffold
@@ -104,7 +95,7 @@ Inspired by platforms like **Replit** and **CodeSandbox**, CodeForge combines:
 
 ---
 
-# 📂 Project Structure
+## Project Structure
 
 ```bash
 codeForge/
@@ -128,26 +119,21 @@ codeForge/
 
 ---
 
-# ⚙️ Sandbox Design
+## Sandbox Design
 
-Every sandbox pod contains:
+Each sandbox pod contains three containers that share the same mounted workspace:
 
 | Container | Purpose |
-|---|---|
+|-----------|---------|
 | `template` | Runs the Vite preview server |
-| `agent` | Handles file operations + terminal |
-| `sync-agent` | Syncs project files with S3 |
+| `agent` | Handles file operations and terminal access |
+| `sync-agent` | Synchronizes project files with S3 |
 
-All containers share the same mounted workspace.
-
-This enables:
-- live editing
-- instant preview updates
-- persistent project storage
+This design enables live editing, instant preview updates, and persistent project storage.
 
 ---
 
-# 🤖 AI Editing Workflow
+## AI Editing Workflow
 
 ```text
 User Prompt
@@ -165,13 +151,13 @@ Files Updated
 Vite HMR Reload
 ```
 
-Users can simply describe changes in natural language and see them reflected instantly inside the running application.
+Users can describe changes in natural language and see them reflected instantly in the running application.
 
 ---
 
-# 🚀 Getting Started
+## Getting Started
 
-## Prerequisites
+### Prerequisites
 
 - Docker
 - Kubernetes
@@ -181,26 +167,20 @@ Users can simply describe changes in natural language and see them reflected ins
 - Redis
 - RabbitMQ
 
----
-
-## Clone Repository
+### Clone the Repository
 
 ```bash
 git clone https://github.com/yourusername/codeForge.git
 cd codeForge
 ```
 
----
-
-## Install Dependencies
+### Install Dependencies
 
 ```bash
 npm install
 ```
 
----
-
-## Start Services Locally
+### Start Services Locally
 
 ```bash
 skaffold dev
@@ -208,9 +188,9 @@ skaffold dev
 
 ---
 
-# 🔑 Environment Variables
+## Environment Variables
 
-Example:
+Create a `.env` file in the project root with the following variables:
 
 ```env
 MONGO_URI=
@@ -226,7 +206,7 @@ MISTRAL_API_KEY=
 
 ---
 
-# 🌐 Kubernetes Routing
+## Kubernetes Routing
 
 ```text
 /api/auth        → Auth Service
@@ -239,69 +219,67 @@ MISTRAL_API_KEY=
 
 ---
 
-# 📸 Core Platform Components
+## Platform Components
 
-### 🖥️ Browser IDE
-- File Explorer
-- Live Preview
-- AI Chat
-- Terminal
+### Browser IDE
+- File explorer with real-time updates
+- Live preview with instant feedback
+- AI-powered chat assistant
+- Integrated terminal with shell access
 
-### ☁️ Kubernetes Sandboxes
-- Isolated environments
-- Auto cleanup
-- Persistent storage
+### Kubernetes Sandboxes
+- Isolated development environments per user
+- Automatic cleanup and resource management
+- Persistent storage integration
 
-### 🤖 AI Agent
-- Reads files
-- Writes code
-- Updates projects live
+### AI Agent
+- Autonomous file reading and modification
+- Code generation and updates
+- Live project synchronization
 
 ---
 
-# 🔥 Key Highlights
+## Key Highlights
 
-- Multi-service architecture
-- Kubernetes-native sandboxing
+- Multi-service microservice architecture
+- Kubernetes-native sandboxing with automatic scaling
 - AI-driven development workflow
-- Persistent cloud projects
-- Real-time preview system
-- Dynamic wildcard routing
-- Fully containerized infrastructure
+- Persistent cloud-based projects
+- Real-time preview system with HMR
+- Dynamic wildcard routing for multi-tenant support
+- Fully containerized infrastructure for consistency
 
 ---
 
-# 📈 Future Improvements
+## Roadmap
 
-- ✅ Production-grade CI/CD
-- ✅ Better multi-language support
-- ✅ Collaborative editing
-- ✅ Workspace snapshots
-- ✅ Advanced AI agents
-- ✅ Observability & metrics
-- ✅ Automated testing
+- Production-grade CI/CD pipelines
+- Multi-language support
+- Collaborative editing capabilities
+- Workspace snapshots and version control
+- Advanced AI agents with specialized capabilities
+- Observability and metrics dashboards
+- Automated testing framework
 
 ---
 
-# 👨‍💻 Inspiration
+## Inspiration
 
 CodeForge is conceptually inspired by:
 - CodeSandbox
 - Replit
 - GitHub Codespaces
 
-while focusing heavily on:
-
-> AI-assisted frontend development in isolated cloud sandboxes.
+While focusing specifically on AI-assisted frontend development in isolated cloud sandboxes.
 
 ---
 
-# 📜 License
+## License
 
 MIT License
 
 ---
 
-# ⭐ Support
+## Support
 
-If you like this project, consider giving it a ⭐ on GitHub!
+For questions, issues, or contributions, please visit the [GitHub repository](https://github.com/yourusername/codeForge).
